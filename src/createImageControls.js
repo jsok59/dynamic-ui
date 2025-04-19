@@ -2,10 +2,8 @@ import circleImg from "./images/circle-outline.svg";
 import leftArrow from "./images/arrow-left-bold.svg";
 import rightArrow from "./images/arrow-right-bold.svg";
 
-function createCircleControls(strip) {
+function createCircleControls(strip, imageNodes, container) {
 	console.log(circleImg);
-	const imageNodes = document.querySelectorAll(".strip img");
-	const container = document.querySelector(".circles");
 	let counter = 0;
 	for (const image of imageNodes) {
 		const circle = document.createElement("img");
@@ -20,16 +18,17 @@ function createCircleControls(strip) {
 	}
 }
 
-function createArrowButtons(container) {
-	const image = document.querySelector(".strip img");
+function createArrowButtons(arrows, image, strip) {
 	const length = document.querySelectorAll(".strip img").length;
-	const strip = document.querySelector(".strip");
 	const leftarrow = document.createElement("img");
 	leftarrow.src = leftArrow;
 	leftarrow.addEventListener("click", () => {
 		if (controller.getIndex() > 0) {
 			strip.style.left = parseInt(strip.style.left) + image.width + "px";
 			controller.decrementIndex();
+		} else {
+			controller.setIndex(length - 1);
+			strip.style.left = -controller.getIndex() * image.width + "px";
 		}
 	});
 
@@ -39,11 +38,14 @@ function createArrowButtons(container) {
 		if (controller.getIndex() < length - 1) {
 			strip.style.left = parseInt(strip.style.left) - image.width + "px";
 			controller.incrementIndex();
+		} else {
+			controller.setIndex(0);
+			strip.style.left = -controller.getIndex() * image.width + "px";
 		}
 	});
 
-	container.appendChild(leftarrow);
-	container.appendChild(rightarrow);
+	arrows.appendChild(leftarrow);
+	arrows.appendChild(rightarrow);
 }
 
 const controller = (function () {
