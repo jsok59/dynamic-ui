@@ -132,3 +132,8 @@ nav {
 	display: flex;
 	justify-self: center;
 }
+
+img.active {
+	background-color: aqua;
+	border-radius: 40px;
+}

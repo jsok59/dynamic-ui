@@ -1,6 +1,7 @@
 import circleImg from "./images/circle-outline.svg";
 import leftArrow from "./images/arrow-left-bold.svg";
 import rightArrow from "./images/arrow-right-bold.svg";
+import { renderFillCircles } from "./renderFillCircles";
 
 function createCircleControls(strip, imageNodes, container) {
 	console.log(circleImg);
@@ -12,6 +13,7 @@ function createCircleControls(strip, imageNodes, container) {
 		circle.addEventListener("click", () => {
 			strip.style.left = -circle.counter * image.width + "px";
 			controller.setIndex(circle.counter);
+			renderFillCircles();
 		});
 		container.appendChild(circle);
 		counter++;
@@ -30,6 +32,7 @@ function createArrowButtons(arrows, image, strip) {
 			controller.setIndex(length - 1);
 			strip.style.left = -controller.getIndex() * image.width + "px";
 		}
+		renderFillCircles();
 	});
 
 	const rightarrow = document.createElement("img");
@@ -42,6 +45,7 @@ function createArrowButtons(arrows, image, strip) {
 			controller.setIndex(0);
 			strip.style.left = -controller.getIndex() * image.width + "px";
 		}
+		renderFillCircles();
 	});
 
 	arrows.appendChild(leftarrow);

@@ -1,6 +1,7 @@
 import "./style.css";
 import { createDropdown } from "./createDropdown";
 import { createCircleControls, createArrowButtons, controller } from "./createImageControls";
+import { renderFillCircles } from "./renderFillCircles";
 
 const dropdown = document.querySelector(".menu");
 const button = document.querySelector(".dropdown > img");
@@ -25,6 +26,7 @@ setInterval(() => {
 		controller.incrementIndex();
 		strip.style.left = -controller.getIndex() * image.width + "px";
 	}
+	renderFillCircles();
 }, 5000);
 window.debug = {
 	button,
